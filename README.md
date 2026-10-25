@@ -14,3 +14,5 @@
 | 路徑 | 被誰引用 |
 | --- | --- |
 | [`live-transcribe/privacy-policy.md`](live-transcribe/privacy-policy.md) | Chrome Web Store 項目「即時轉錄摘要 — 直播/會議側欄」的隱私權政策欄位 |
+| [`mcp-gcp-ops-monitor/privacy-policy.md`](mcp-gcp-ops-monitor/privacy-policy.md) | Google OAuth 應用程式「MCP與GCP服務維運監測系統」品牌頁的隱私權政策連結 |
+| [`mcp-gcp-ops-monitor/terms-of-service.md`](mcp-gcp-ops-monitor/terms-of-service.md) | 同上，服務條款連結 |
