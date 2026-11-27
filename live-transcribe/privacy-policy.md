@@ -2,7 +2,7 @@
 
 本政策適用於 Chrome 擴充功能「即時轉錄摘要 — 直播/會議側欄」。
 
-**發布日期：2026-09-04**（版本 1.5，2026-11-25 更新）
+**發布日期：2026-09-04**（版本 1.6，2026-11-27 更新）
 
 ---
 
@@ -13,17 +13,18 @@
 | 資料 | 產生時機 | 去向 |
 | --- | --- | --- |
 | 分頁音訊 | 使用者主動點擊工具列圖示啟動擷取後 | 即時串流至 Deepgram 語音辨識服務 |
-| 逐字稿 | Deepgram 回傳 | 顯示於側欄、儲存於本機 IndexedDB；產生摘要時送交 Google Gemini（預設經由開發者維運的中繼服務轉送至 Google Cloud Vertex AI；使用者若自行填入 Gemini API 金鑰，則直接送交 Google Gemini API） |
-| 摘要 | Gemini 回傳 | 顯示於側欄、儲存於本機 IndexedDB |
-| 使用者填入的名單／場次名稱／特別指示 | 使用者自行輸入 | 併入送交 Gemini 的提示詞；儲存於本機 |
+| 逐字稿 | Deepgram 回傳 | 顯示於側欄、儲存於本機 IndexedDB；產生摘要時送交 Google Gemini（預設經由開發者維運的中繼服務轉送至 Google Cloud Vertex AI；使用者若自行填入 Gemini API 金鑰，則直接送交 Google Gemini API；若自行填入 Anthropic API 金鑰，則改為直接送交 Anthropic Claude API） |
+| 摘要 | 摘要服務（Gemini 或 Claude）回傳 | 顯示於側欄、儲存於本機 IndexedDB |
+| 使用者填入的名單／場次名稱／特別指示 | 使用者自行輸入 | 併入送交摘要服務的提示詞；儲存於本機 |
 | 第三方 API 金鑰／中繼服務密鑰 | 使用者自行填入選項頁 | 僅儲存於本機 `chrome.storage.local`，僅用於呼叫對應服務 |
 
 ## 二、第三方服務
 
 - **Deepgram**（語音辨識）：接收音訊串流。適用其[服務條款與隱私權政策](https://deepgram.com/privacy)。
 - **Google Gemini API**（摘要生成）：接收逐字稿文字。適用 [Google API 服務條款](https://policies.google.com/privacy)。
+- **Anthropic Claude API**（摘要生成，僅限使用者自行填入 Anthropic API 金鑰時）：接收逐字稿文字，由瀏覽器直接呼叫，不經過下方的中繼服務。適用 [Anthropic 隱私權政策](https://www.anthropic.com/legal/privacy)與[商業服務條款](https://www.anthropic.com/legal/commercial-terms)。
 
-語音辨識以**使用者自備的 API 金鑰**呼叫，資料處理關係存在於使用者與該服務商之間。
+語音辨識，以及使用者自行選用的 Gemini／Claude 摘要，皆以**使用者自備的 API 金鑰**呼叫，資料處理關係存在於使用者與該服務商之間。
 
 ### 摘要中繼服務
 
@@ -33,9 +34,9 @@
 - **紀錄只有中繼資料**：呼叫者代號、模型名稱、HTTP 狀態、耗時，以及產生全場摘要時所選的摘要模式代號（用來統計各摘要範本的選用率）。請求與回應的內容一律不寫入紀錄。
 - **不用於訓練**：Vertex AI 依 Google Cloud 條款不以客戶內容改進模型。
 
-使用者若在選項頁填入自己的 Gemini API 金鑰，則改為由瀏覽器直接呼叫 Google Gemini API，不經過此中繼服務。
+使用者若在選項頁填入自己的 Gemini API 金鑰，則改為由瀏覽器直接呼叫 Google Gemini API；填入 Anthropic API 金鑰則改為直接呼叫 Anthropic Claude API。兩者皆不經過此中繼服務。
 
-> 📌 **本工具不將內容提供給服務商訓練模型**（2026-08-12 更新）：Deepgram 呼叫一律帶 `mip_opt_out=true`（退出其模型改進計畫）；Gemini 走付費層，依其附加條款不以 prompt／回應改進產品。
+> 📌 **本工具不將內容提供給服務商訓練模型**（2026-08-12 更新）：Deepgram 呼叫一律帶 `mip_opt_out=true`（退出其模型改進計畫）；Gemini 走付費層，依其附加條款不以 prompt／回應改進產品；Claude API 依 Anthropic 商業服務條款，預設不以 API 輸入與輸出訓練模型。
 >
 > ⚠️ 使用定位：本工具設計用於**公開場次**（議事轉播、直播、對外研討會）。錄製內部會議或涉及機密、敏感、個人資料之場合前，請先確認貴單位的內部規範——音訊與逐字稿仍會傳送至境外（美國）服務商處理。
 
