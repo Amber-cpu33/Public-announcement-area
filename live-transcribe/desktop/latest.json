@@ -1,9 +1,9 @@
 {
- "version": "1.65",
- "url": "https://github.com/Amber-cpu33/Public-announcement-area/releases/download/live-transcribe-desktop-v1.65/live_transcribe_desktop_setup_v1.65.exe",
- "sha256": "8d812c06fd243ae3ad69d93c64f3f5fbcf91762756053ebf84c794bf77acb42e",
+ "version": "1.68",
+ "url": "https://github.com/Amber-cpu33/Public-announcement-area/releases/download/live-transcribe-desktop-v1.68/live_transcribe_desktop_setup_v1.68.exe",
+ "sha256": "73264a6f118447d0a917d8454311e49e234b1871b05ba3a5e328821bdf34d723",
  "minVersion": "",
  "auto": true,
  "notes": "",
- "sig": "q+uiDKktKMMddiOsk8axjRHMUwCbU0Hz4s+cJl0I+nijqUgcOTBwRyYSrkvFRmBcACMyAbOGVkn9L8sssb2QDg=="
+ "sig": "tARJUsk6WwfKeuv4M9MGDFrBSGR39imJVfDcBni7i/PSGxLDngPBLUPr6Xloa67Bjxz11olTtKAksTFsCwbkAA=="
 }
